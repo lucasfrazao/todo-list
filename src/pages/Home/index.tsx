@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react'
 
 import { CreateButton } from 'components/CreateButton'
-import { EmptyTaskList } from 'components/EmptyTaskList'
 import { Input } from 'components/Input'
 
+import { Task } from 'components/Task'
 import { Container, Content, TaskList } from './styles'
 
 export default function Home() {
@@ -45,7 +45,9 @@ export default function Home() {
         </header>
 
         <TaskList>
-          <EmptyTaskList />
+          {/* <EmptyTaskList /> */}
+
+          <Task />
         </TaskList>
       </Content>
     </Container>
