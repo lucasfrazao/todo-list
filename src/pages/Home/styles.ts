@@ -78,7 +78,10 @@ export const Content = styled.div`
 `
 
 export const TaskList = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 
+  gap: 1rem;
+  width: 100%;
   margin-top: 1.5rem;
 `

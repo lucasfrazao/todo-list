@@ -3,15 +3,30 @@ import { FormEvent, useState } from 'react'
 import { CreateButton } from 'components/CreateButton'
 import { Input } from 'components/Input'
 
-import { Task } from 'components/Task'
+import { EmptyTaskList } from 'components/EmptyTaskList'
+import { Task, TaskProps } from 'components/Task'
 import { Container, Content, TaskList } from './styles'
 
 export default function Home() {
-  const [task, setTask] = useState<string>('')
+  const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [descriptionNewTask, setDescriptionNewTask] = useState<string>('')
 
   const handleNewTask = (event: FormEvent) => {
     event.preventDefault()
-    console.log('new task', task)
+
+    const newTask = {
+      description: descriptionNewTask,
+      statusTask: 'not-completed',
+    }
+
+    setTasks([...tasks, newTask])
+  }
+
+  function deleteTask(taskToDelete: TaskProps) {
+    const tasksWithoutDeletedOne = tasks.filter((task) => {
+      return task !== taskToDelete
+    })
+    setTasks(tasksWithoutDeletedOne)
   }
 
   return (
@@ -26,7 +41,7 @@ export default function Home() {
           label="Add a new task"
           placeholder="Add a new task"
           type="text"
-          onChange={(event) => setTask(event.target.value)}
+          onChange={(event) => setDescriptionNewTask(event.target.value)}
         />
         <CreateButton />
       </form>
@@ -45,9 +60,17 @@ export default function Home() {
         </header>
 
         <TaskList>
-          {/* <EmptyTaskList /> */}
-
-          <Task />
+          {tasks.length === 0 ? (
+            <EmptyTaskList />
+          ) : (
+            <>
+              {tasks.map((task, index) => {
+                return (
+                  <Task key={index} task={task} onDeleteTask={deleteTask} />
+                )
+              })}
+            </>
+          )}
         </TaskList>
       </Content>
     </Container>
