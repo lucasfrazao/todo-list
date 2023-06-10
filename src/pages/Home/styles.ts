@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  header {
+  header.header__main {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,7 @@ export const Container = styled.div`
   }
 
   form {
-    width: 100%;
+    width: 60%;
 
     display: flex;
     flex-direction: row;
@@ -30,4 +30,55 @@ export const Container = styled.div`
 
     margin-top: -1.6rem;
   }
+`
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 60%;
+  margin-top: 4rem;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    font-size: 0.875rem;
+  }
+
+  header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 0.5rem;
+  }
+
+  header span:first-child {
+    font-weight: bold;
+    color: var(--blue);
+  }
+
+  header span:last-child {
+    color: var(--gray-200);
+    background-color: var(--gray-400);
+    padding: 0 0.5rem;
+
+    border-radius: 50%;
+  }
+
+  header .completed span:first-child {
+    color: var(--purple);
+  }
+`
+
+export const TaskList = styled.div`
+  width: 100%;
+
+  margin-top: 1.5rem;
 `
