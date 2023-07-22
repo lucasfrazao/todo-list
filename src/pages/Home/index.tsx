@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useEffect } from 'react'
 
 import { CreateButton } from 'components/CreateButton'
 import { Input } from 'components/Input'
@@ -9,7 +9,10 @@ import { Container, Content, TaskList } from './styles'
 
 export default function Home() {
   const [tasks, setTasks] = useState<TaskProps[]>([])
+  const [totalTasksCompleted, setTotalTasksCompleted] = useState<number>(0)
   const [descriptionNewTask, setDescriptionNewTask] = useState<string>('')
+
+  const totalTasks = tasks.length
 
   const handleNewTask = (event: FormEvent) => {
     event.preventDefault()
@@ -28,6 +31,16 @@ export default function Home() {
     })
     setTasks(tasksWithoutDeletedOne)
   }
+
+  useEffect(() => {
+    const totalCompletedTasks = tasks.filter(
+      (task) => task.statusTask === 'completed',
+    ).length
+
+    console.log(totalCompletedTasks)
+
+    setTotalTasksCompleted(totalCompletedTasks)
+  }, [tasks])
 
   return (
     <Container>
@@ -50,12 +63,14 @@ export default function Home() {
         <header>
           <div className="created">
             <span>Tasks created</span>
-            <span>0</span>
+            <span>{totalTasks}</span>
           </div>
 
           <div className="completed">
             <span>Completed</span>
-            <span>0</span>
+            <span>
+              {totalTasksCompleted} of {totalTasks}
+            </span>
           </div>
         </header>
 

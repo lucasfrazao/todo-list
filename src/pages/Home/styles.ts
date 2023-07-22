@@ -75,6 +75,10 @@ export const Content = styled.div`
   header .completed span:first-child {
     color: var(--purple);
   }
+
+  header .completed span:last-child {
+    border-radius: 0.5rem;
+  }
 `
 
 export const TaskList = styled.div`
